@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/homestyle.css' %}">
+<body>
+<div class="main" id="top">
+{% if latest_question_list %}
+    <div class="Heading">Question{{latest_question_list.count|pluralize}} Available in Database:</div>
+    <div class="instructions" style="text-align: left;">
+        <ul>
+        {% for question in latest_question_list %}
+        <!--
+            Question ID: {{question.id}}
+            Question Text: {{question.question_text}}
+        -->
+            <li style="margin-bottom:5px;"><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
